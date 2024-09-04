@@ -1,8 +1,5 @@
-# %%
 import pandas as pd
-import numpy as np
 import streamlit as st
-import time
 
 def transform_pile_plant(data):
     # Formatar 'Position X', 'Position Y', e 'Position Z'
@@ -39,37 +36,45 @@ def transform_pile_plant(data):
     data_sorted = data_renamed.sort_values(by=['COLUNA', 'LINHA', 'PILAR'], ascending=[True, True, True])
     
     # Salvar o DataFrame resultante em um arquivo Excel
-    out_path = r"C:\Users\netlu\OneDrive\Área de Trabalho\Nova pasta\pile plant\BLOCOS_PILE_PLANT_FINAL.xlsx"
+    out_path = "BLOCOS_PILE_PLANT_FINAL.xlsx"  # Caminho relativo
     data_sorted.to_excel(out_path, index=False)
+    
+    return out_path
 
-#path = r"C:\Users\netlu\OneDrive\Área de Trabalho\Nova pasta\pile plant\BLOCOS_PILE_PLANT_RAW.xls"
-#data = pd.read_excel(path)
-#transform_pile_plant(data)
+# Interface do Streamlit
 welcome = """
 # DATA TRANSFORMATION
 
  Data Transformation for Pile Plant foundations files in Photovoltaics Power Plants
-                            in .xlsx or .csv format
+                            in .xlsx, .xls, or .csv format
 
 """
 
+st.markdown(welcome)
 
-st.markdown(welcome,)
-
-upload_file = st.file_uploader("Insert your file", type=["xlsx", "csv"])
+upload_file = st.file_uploader("Insert your file", type=["xlsx", "xls", "csv"])
 
 if upload_file is not None:
     # Verificar a extensão do arquivo e ler o arquivo
     if upload_file.name.endswith('.xlsx'):
         data = pd.read_excel(upload_file)
+    elif upload_file.name.endswith('.xls'):
+        data = pd.read_excel(upload_file, engine='xlrd')  # Usar 'xlrd' para arquivos .xls
     elif upload_file.name.endswith('.csv'):
         data = pd.read_csv(upload_file)
 
     # Exibir as primeiras linhas do DataFrame para verificação
-    st.write(data.head())
+    st.subheader("Data pre-visualization")
+    st.dataframe(data.head())
 
-st.subheader("Data pre-visualization")
-st.dataframe(data.head())
-
-st.subheader("Transformed Data pre-visualization")
-st.dataframe(data.head())
+    # Botão para transformar os dados
+    if st.button("Transform Pile Plant Data"):
+        # Chamar a função de transformação e obter o caminho do arquivo
+        out_path = transform_pile_plant(data)
+        
+        # Oferecer o arquivo transformado para download
+        with open(out_path, "rb") as file:
+            st.download_button(label="Download Transformed File",
+                               data=file,
+                               file_name="BLOCOS_PILE_PLANT_FINAL.xlsx",
+                               mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
