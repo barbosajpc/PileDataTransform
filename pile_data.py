@@ -45,10 +45,18 @@ def transform_pile_plant(data):
 #path = r"C:\Users\netlu\OneDrive\Área de Trabalho\Nova pasta\pile plant\BLOCOS_PILE_PLANT_RAW.xls"
 #data = pd.read_excel(path)
 #transform_pile_plant(data)
+welcome = """
+# DATA TRANSFORMATION
 
-st.title("Transformação dos dados - Pile Plant")
+ Data Transformation for Pile Plant foundations files in Photovoltaics Power Plants
+                            in .xlsx or .csv format
 
-upload_file = st.file_uploader("Insira o arquivo", type=["xlsx", "csv"])
+"""
+
+
+st.markdown(welcome,)
+
+upload_file = st.file_uploader("Insert your file", type=["xlsx", "csv"])
 
 if upload_file is not None:
     # Verificar a extensão do arquivo e ler o arquivo
@@ -60,3 +68,8 @@ if upload_file is not None:
     # Exibir as primeiras linhas do DataFrame para verificação
     st.write(data.head())
 
+st.subheader("Data pre-visualization")
+st.dataframe(data.head())
+
+st.subheader("Transformed Data pre-visualization")
+st.dataframe(data.head())
