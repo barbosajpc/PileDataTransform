@@ -57,7 +57,7 @@ upload_file = st.file_uploader("Insert your file", type=["xlsx", "xls", "csv"])
 if upload_file is not None:
     # Verificar a extensão do arquivo e ler o arquivo
     if upload_file.name.endswith('.xlsx'):
-        data = pd.read_excel(upload_file)
+        data = pd.read_excel(upload_file, engine = 'openpyxl')
     elif upload_file.name.endswith('.xls'):
         data = pd.read_excel(upload_file, engine='xlrd')  # Usar 'xlrd' para arquivos .xls
     elif upload_file.name.endswith('.csv'):
