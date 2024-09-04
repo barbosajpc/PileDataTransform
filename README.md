@@ -2,7 +2,7 @@
 
 Este projeto fornece uma aplicação web interativa usando Streamlit para transformação de dados de arquivos Excel e CSV relacionados a fundações de plantas fotovoltaicas. A aplicação permite a transformação e o formato dos dados, incluindo a mesclagem e alinhamento das células em um arquivo Excel resultante.
 
-Acesse a aplicação no link fornecido via Streamlit: piledatatransformation.streamlit.app
+Acesse a aplicação no link fornecido via Streamlit: [Clique Aqui](piledatatransformation.streamlit.app)
 
 ## Funcionalidades
 
@@ -10,7 +10,7 @@ Acesse a aplicação no link fornecido via Streamlit: piledatatransformation.str
 - **Mesclagem e Alinhamento de Células**: Mescla células baseadas em valores comuns e alinha vertical e horizontalmente o conteúdo.
 - **Interface Interativa**: Usa Streamlit para uma interface web amigável para o upload de arquivos e visualização dos dados.
 
-## Tecnologias Utilizadas
+## Ferramentas Utilizadas
 
 - **Python**: Linguagem de programação principal.
 - **pandas**: Biblioteca para manipulação de dados.
@@ -69,4 +69,4 @@ Mescla células baseadas em valores comuns e alinha o conteúdo vertical e horiz
 
 Para mais informações ou dúvidas, entre em contato com [jpedrobarbosa.jpb@gmail.com].
 
-Linkedin: https://www.linkedin.com/in/jo%C3%A3o-pedro-barbosa-697678254/
+Linkedin: [Clique Aqui](https://www.linkedin.com/in/jo%C3%A3o-pedro-barbosa-697678254/)
