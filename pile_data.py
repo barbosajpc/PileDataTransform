@@ -57,7 +57,7 @@ upload_file = st.file_uploader("Insert your file", type=["xlsx", "xls", "csv"])
 if upload_file is not None:
     # Verificar a extensão do arquivo e ler o arquivo
     if upload_file.name.endswith('.xlsx'):
-        data = pd.read_excel(upload_file, engine = 'openpyxl')
+        data = pd.read_excel(upload_file, engine='openpyxl')
     elif upload_file.name.endswith('.xls'):
         data = pd.read_excel(upload_file, engine='xlrd')  # Usar 'xlrd' para arquivos .xls
     elif upload_file.name.endswith('.csv'):
@@ -71,10 +71,18 @@ if upload_file is not None:
     if st.button("Transform Pile Plant Data"):
         # Chamar a função de transformação e obter o caminho do arquivo
         out_path = transform_pile_plant(data)
-        
+
+        # Ler o arquivo transformado para visualização
+        transformed_data = pd.read_excel(out_path)
+
+        st.subheader("Transformed Data Pre-Visualization")
+        st.dataframe(transformed_data.head())
+
         # Oferecer o arquivo transformado para download
         with open(out_path, "rb") as file:
-            st.download_button(label="Download Transformed File",
-                               data=file,
-                               file_name="BLOCOS_PILE_PLANT_FINAL.xlsx",
-                               mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            st.download_button(
+                label="Download Transformed File",
+                data=file,
+                file_name="BLOCOS_PILE_PLANT_FINAL.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
